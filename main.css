@@ -1,0 +1,76 @@
+:root {
+    --primary-container: #FFDAD7;
+    --primary: #904A46;
+    --actionBar-marginLeft: 2.5vh;
+    --onPrimary: #3B0909;
+}
+
+@font-face {
+    font-family: "Google Sans", sans-serif;
+    src: url("./res/GoogleSans-Regular.ttf");
+}
+
+html {
+    font-family: "Google Sans", sans-serif !important;
+    margin: 0;
+    background-color: var(--primary-container);
+    min-height: 100vh;
+}
+
+body {
+    margin: 0;
+}
+
+#actionBar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    transition: all ease-out 0.25s;
+    background-color: var(--primary);
+    /*margin: 5vh 0 5vh var(--actionBar-marginLeft);*/
+    left: var(--actionBar-marginLeft);
+    bottom: 5vh;
+    height: 90vh;
+    width: 250px;
+    border-radius: 40px;
+}
+
+#icons {
+    border: 1px solid black;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    gap: 15px;
+}
+
+#buttons {
+    /*border: 1px solid black;*/
+    width: 210px;
+    margin-bottom: 25px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+#buttons input {
+    transition: all ease-out 0.25s;
+    width: 100%;
+    padding: 5px 0;
+    border-radius: 13px;
+    border: none;
+    font-size: 1.3rem;
+    color: var(--onPrimary);
+    background-color: #FFF;
+
+    margin-top: 10px;
+}
+
+#buttons input:hover {
+    background-color: #FFB3AD;
+    color: #904A46;
+}
