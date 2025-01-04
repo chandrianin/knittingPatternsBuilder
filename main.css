@@ -30,25 +30,48 @@ body {
     align-items: center;
     transition: all ease-out 0.25s;
     background-color: var(--primary);
-    /*margin: 5vh 0 5vh var(--actionBar-marginLeft);*/
+
     left: var(--actionBar-marginLeft);
-    bottom: 5vh;
-    height: 90vh;
+    bottom: 3vh;
+    height: 92vh;
     width: 250px;
-    border-radius: 40px;
+    border-radius: 20px;
 }
 
-#icons {
-    border: 1px solid black;
-    margin-top: 40px;
+#iconBricks {
+    margin-top: 25px;
     display: grid;
-    grid-template-columns: 50px 50px 50px;
-    grid-template-rows: 50px 50px 50px;
-    gap: 15px;
+    width: 200px;
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(auto-fill, 60px);
+    gap: calc((200px - 180px) / 2);
+    /*row-gap: 15px;*/
+}
+
+#iconBricks img {
+    transition: all ease-out 0.15s;
+
+    border-radius: 7px;
+}
+
+#iconBricks .noSelected {
+    width: 60px;
+    background-color: var(--primary-container);
+}
+
+#iconBricks .noSelected:hover {
+    border-radius: 12px;
+    background-color: #ce6d6d;
+}
+
+#iconBricks .selected {
+    border-radius: 12px;
+    width: 58px;
+    background-color: #bd4e4e;
+    border: 1px solid #460a0a;
 }
 
 #buttons {
-    /*border: 1px solid black;*/
     width: 210px;
     margin-bottom: 25px;
 
@@ -57,11 +80,28 @@ body {
     flex-wrap: nowrap;
 }
 
+#buttons div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+#buttons div input {
+    width: 40%;
+    text-align: center;
+}
+
+#buttons div input:hover {
+    border-radius: 13px;
+
+}
+
 #buttons input {
     transition: all ease-out 0.25s;
     width: 100%;
     padding: 5px 0;
-    border-radius: 13px;
+    border-radius: 10px;
     border: none;
     font-size: 1.3rem;
     color: var(--onPrimary);
@@ -73,4 +113,34 @@ body {
 #buttons input:hover {
     background-color: #FFB3AD;
     color: #904A46;
+    border-radius: 17px;
+}
+
+#container {
+    transition: all ease-out 0.25s;
+
+    position: absolute;
+    left: calc(250px + var(--actionBar-marginLeft) * 2);
+    padding-right: calc(var(--actionBar-marginLeft) * 2);
+    bottom: 3vh;
+
+    border: 1px solid var(--onPrimary);
+
+    /*width: calc(100vw - (250px + var(--actionBar-marginLeft) * 5));*/
+    min-height: 92vh;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 60px);
+    grid-template-rows: repeat(auto-fill, 60px);
+    gap: calc(10px);
+}
+
+#container img {
+    transition: all ease-out 0.15s;
+    width: 50px;
+    border: #3B0909 1px solid
+}
+
+#container img:hover {
+    background-color: #ce6d6d;
 }

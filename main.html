@@ -2,16 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <script src="index.js"></script>
     <link rel="stylesheet" href="main.css">
     <title>Конструктор схем</title>
 </head>
 <body>
 <div id="actionBar">
-    <div id="icons">
+    <div id="iconBricks">
 
     </div>
     <div id="buttons">
         <!--TODO менять цвет кнопки после нажатия-->
+        <div>
+            <input type="number" onchange="inputChange()" id="rowInput" min="2" max="200" value="2" placeholder="Строк">
+            <input type="number" onchange="inputChange()" id="columnInput" min="2" max="200" value="4" placeholder="Столбцов">
+        </div>
         <input type="button" value="Поворот на 90°">
         <input type="button" value="Поворот на -90°">
         <input type="button" value="Copy paste">
