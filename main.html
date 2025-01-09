@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <script src="index.js"></script>
+    <script src="main.js"></script>
     <link rel="stylesheet" href="main.css">
     <title>Конструктор схем</title>
 </head>
@@ -14,8 +14,15 @@
     <div id="buttons">
         <!--TODO менять цвет кнопки после нажатия-->
         <div>
+            <label for="current_file_name">Файл:</label>
+            <input type="text" name="current_file_name"
+                   id="current_file_name" placeholder="Название" value="Моя схема">
+        </div>
+        <input type="button" value="Сохранения" onclick="saveList()">
+        <div>
             <input type="number" onchange="inputChange()" id="rowInput" min="2" max="200" value="2" placeholder="Строк">
-            <input type="number" onchange="inputChange()" id="columnInput" min="2" max="200" value="4" placeholder="Столбцов">
+            <input type="number" onchange="inputChange()" id="columnInput" min="2" max="200" value="4"
+                   placeholder="Столбцов">
         </div>
         <input type="button" value="Поворот на 90°">
         <input type="button" value="Поворот на -90°">
@@ -24,6 +31,9 @@
         <input type="button" value="Сохранить">
         <input type="button" value="Распечатать">
     </div>
+</div>
+<div id="saveBar" class="open">
+    <!--TODO спрашивать по поводу перезаписи сохранения-->
 </div>
 <div id="container">
 

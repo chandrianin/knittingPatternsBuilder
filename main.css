@@ -1,7 +1,7 @@
 :root {
     --primary-container: #FFDAD7;
     --primary: #904A46;
-    --actionBar-marginLeft: 2.5vh;
+    --actionBar-margin: 2.5vh;
     --onPrimary: #3B0909;
 }
 
@@ -21,21 +21,85 @@ body {
     margin: 0;
 }
 
-#actionBar {
+#actionBar, #saveBar {
+    z-index: 1;
     position: fixed;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: space-between;
+
     align-items: center;
+
     transition: all ease-out 0.25s;
     background-color: var(--primary);
 
-    left: var(--actionBar-marginLeft);
-    bottom: 3vh;
-    height: 92vh;
+    height: 93vh;
+    bottom: 2.5vh;
     width: 250px;
     border-radius: 20px;
+}
+
+#actionBar {
+    justify-content: space-between;
+    left: var(--actionBar-margin);
+}
+
+#saveBar {
+    width: 300px;
+    overflow: auto;
+    height: calc(93vh - 25px);
+    transition: right ease-out 0.3s;
+    right: -250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 25px;
+}
+#saveBar div {
+    transition: all ease-out 0.25s;
+    margin-bottom: 15px;
+    width: 224px;
+    border-radius: 17px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 0 13px;
+    cursor: pointer;
+}
+
+#saveBar div:hover {
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 25px;
+}
+
+#saveBar div img {
+    transition: all ease-out 0.25s;
+    width: 30px;
+    padding: 6px;
+    border-radius: 13px;
+    background-color: rgba(70, 10, 10, 0.6);
+}
+
+#saveBar div img:hover {
+    border-radius: 18px;
+    background-color: rgba(70, 10, 10, 0.5);
+}
+
+#saveBar div p {
+    font-size: 1.2em;
+}
+
+#saveBar.open {
+    right: var(--actionBar-margin) !important;
+}
+
+#saveBar iframe {
+    border: 0;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
 }
 
 #iconBricks {
@@ -45,7 +109,6 @@ body {
     grid-template-columns: repeat(3, 60px);
     grid-template-rows: repeat(auto-fill, 60px);
     gap: calc((200px - 180px) / 2);
-    /*row-gap: 15px;*/
 }
 
 #iconBricks img {
@@ -84,20 +147,33 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center
 }
 
-#buttons div input {
+#buttons div label {
+    color: #FFFFFF;
+    font-size: 1.1rem;
+}
+
+#buttons div input[type=text] {
+    color: var(--onPrimary);
+    background: rgba(255, 255, 255, 0.4);
+    width: 70%;
+    font-size: 1.1rem;
+}
+
+#buttons div input[type=number] {
     width: 40%;
     text-align: center;
 }
 
-#buttons div input:hover {
+#buttons div input[type=number]:hover {
     border-radius: 13px;
 
 }
 
-#buttons input {
+#buttons input[type=button], #buttons input[type=number] {
     transition: all ease-out 0.25s;
     width: 100%;
     padding: 5px 0;
@@ -110,7 +186,7 @@ body {
     margin-top: 10px;
 }
 
-#buttons input:hover {
+#buttons input[type=button]:hover, #buttons input[type=number]:hover {
     background-color: #FFB3AD;
     color: #904A46;
     border-radius: 17px;
@@ -120,8 +196,8 @@ body {
     transition: all ease-out 0.25s;
 
     position: absolute;
-    left: calc(250px + var(--actionBar-marginLeft) * 2);
-    padding-right: calc(var(--actionBar-marginLeft) * 2);
+    left: calc(250px + var(--actionBar-margin) * 2);
+    padding-right: calc(var(--actionBar-margin) * 2);
     bottom: 3vh;
 
     border: 1px solid var(--onPrimary);
@@ -137,7 +213,7 @@ body {
 
 #container img {
     transition: all ease-out 0.15s;
-    width: 50px;
+    width: 48px;
     border: #3B0909 1px solid
 }
 
