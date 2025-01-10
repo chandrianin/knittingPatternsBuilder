@@ -49,12 +49,19 @@ body {
     overflow: auto;
     height: calc(93vh - 25px);
     transition: right ease-out 0.3s;
-    right: -250px;
+    right: -300px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     padding-top: 25px;
 }
+
+#saveBar div.selected {
+    width: 220px;
+    height: 46px;
+    border: 3px solid #6f0303;
+}
+
 #saveBar div {
     transition: all ease-out 0.25s;
     margin-bottom: 15px;
@@ -78,7 +85,7 @@ body {
 #saveBar div img {
     transition: all ease-out 0.25s;
     width: 30px;
-    padding: 6px;
+    padding: 4px;
     border-radius: 13px;
     background-color: rgba(70, 10, 10, 0.6);
 }
