@@ -41,6 +41,7 @@ function savesShow() {
     }
 }
 
+let tempDelState = false;
 //удаление сохранения
 function keyDelete(element) {
     let key = (element.parentElement).children[0].innerText;
@@ -52,14 +53,20 @@ function keyDelete(element) {
             savesShow();
             if (key === currentKey) {
                 keyPick(document.getElementById('saveBar').children[0]);
+            } else {
+
             }
         }
+        tempDelState = true;
     }
 }
 
 
 // выбор сохранения
 function keyPick(element) {
+    if (tempDelState) {
+        return;
+    }
     console.log(element);
     // saveData();
     document.getElementById('current_file_name').value = element.children[0].innerHTML;
