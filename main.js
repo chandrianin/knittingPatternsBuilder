@@ -65,6 +65,7 @@ function keyDelete(element) {
 // выбор сохранения
 function keyPick(element) {
     if (tempDelState) {
+        tempDelState = false;
         return;
     }
     console.log(element);

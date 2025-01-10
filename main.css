@@ -207,22 +207,32 @@ body {
     padding-right: calc(var(--actionBar-margin) * 2);
     bottom: 3vh;
 
-    border: 1px solid var(--onPrimary);
+    /*border: 1px solid var(--onPrimary);*/
 
     /*width: calc(100vw - (250px + var(--actionBar-marginLeft) * 5));*/
     min-height: 92vh;
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, 60px);
-    grid-template-rows: repeat(auto-fill, 60px);
-    gap: calc(10px);
+    grid-template-columns: repeat(auto-fill, 49.6px);
+    grid-template-rows: repeat(auto-fill, 49.6px);
+
+    row-gap: 0;
+    column-gap: 0;
 }
 
 #container img {
     transition: all ease-out 0.15s;
-    width: 48px;
+    width: 49px;
+    /*height: 49px;*/
     border: #3B0909 1px solid
 }
+
+/*#container img circle!*img[src=""]*!*/
+/*{*/
+/*    fill: var(--onPrimary) !important;*/
+/*    stroke: rgba(0, 0, 0, 0) !important;*/
+/*}*/
+
 
 #container img:hover {
     background-color: #ce6d6d;
