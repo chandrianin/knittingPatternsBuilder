@@ -171,7 +171,9 @@ body {
 }
 
 #buttons div input[type=number] {
-    width: 40%;
+    margin-top: 25px;
+    padding: 0 0;
+    width: 30%;
     text-align: center;
 }
 
@@ -186,12 +188,22 @@ body {
     padding: 5px 0;
     border-radius: 10px;
     border: none;
+    height: 36px;
     font-size: 1.3rem;
     color: var(--onPrimary);
     background-color: #FFF;
 
     margin-top: 10px;
 }
+#buttons input[type=button].selected {
+    background-color: #bd4e4e !important;
+    color: var(--onPrimary) !important;
+    border: 1px solid #460a0a !important;
+    border-radius: 17px !important;
+    /*height: ;*/
+    /*width: calc(100% - 2px) !important;*/
+}
+
 
 #buttons input[type=button]:hover, #buttons input[type=number]:hover {
     background-color: #FFB3AD;
@@ -213,8 +225,8 @@ body {
     min-height: 92vh;
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, 49.6px);
-    grid-template-rows: repeat(auto-fill, 49.6px);
+    grid-template-columns: repeat(auto-fill, 50px);
+    grid-template-rows: repeat(auto-fill, 50px);
 
     row-gap: 0;
     column-gap: 0;
@@ -227,12 +239,9 @@ body {
     border: #3B0909 1px solid
 }
 
-/*#container img circle!*img[src=""]*!*/
-/*{*/
-/*    fill: var(--onPrimary) !important;*/
-/*    stroke: rgba(0, 0, 0, 0) !important;*/
-/*}*/
-
+#container img.primarySelected {
+    background-color: #a60f0f !important;
+}
 
 #container img:hover {
     background-color: #ce6d6d;
