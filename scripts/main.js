@@ -26,6 +26,8 @@ function inputChange() {
 
 // отрисовка всех элементов схемы
 function containerCreate(newRows, newColumns) {
+    document.getElementById('container').style.width = 52.6 * parseInt(newColumns) + 'px';
+    document.getElementById('container').style.height = 52.6 * parseInt(newRows) + 'px';
     let newElements = []
     for (let i = 0; i < newRows; i++) {
         newElements.push([]);
@@ -41,9 +43,9 @@ function containerCreate(newRows, newColumns) {
     elements = newElements;
 
     let container = document.getElementById("container")
-    container.style.gridTemplateRows = "repeat(" + elements.length + ", 50px)";
+    container.style.gridTemplateRows = "repeat(" + elements.length + ", 52.6px)";
     if (elements.length > 0) {
-        container.style.gridTemplateColumns = "repeat(" + elements[0].length + ", 50px)";
+        container.style.gridTemplateColumns = "repeat(" + elements[0].length + ", 52.6px)";
     }
 
     let temp = ''
