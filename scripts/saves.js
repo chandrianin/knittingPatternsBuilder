@@ -1,4 +1,5 @@
 let tempDelState = false;
+
 // показ всех сохранений
 function savesShow() {
     let result = [];
@@ -48,12 +49,14 @@ function keyDelete(element) {
 
 // выбор сохранения
 function keyPick(element) {
+    brickPickReset()
+    actionButtonsReset()
+    areaPickReset();
     if (tempDelState) {
         tempDelState = false;
         return;
     }
     console.log(element);
-    // saveData();
     document.getElementById('current_file_name').value = element.children[0].innerHTML;
     currentKey = undefined;
     elements = JSON.parse(localStorage.getItem(element.children[0].innerHTML));

@@ -43,6 +43,10 @@ function checkFileName() {
 
 // выбор используемой картинки-элемента
 function brickPick(icon) {
+    //убираем везде возможный выбор
+    brickPickReset();
+    areaPickReset()
+    actionButtonsReset();
 
     selectedIconSRC = icon.src;
     for (let brick of document.getElementById('iconBricks').children) {
@@ -55,19 +59,6 @@ function brickPick(icon) {
         lastSelectedIcon = undefined;
 
     }
-    // if (lastSelectedIcon !== undefined) {
-    //     lastSelectedIcon.className = 'noSelected'
-    // }
-    // lastSelectedIcon = icon;
-
-    //убираем везде возможный выбор
-    for (let button of document.getElementById('buttons').children) {
-        if (button.id.split('-')[0]) {
-            button.className = '';
-        }
-    }
-    // selectedIconSRC = undefined;
-    areaPickingReset();
 
 }
 
@@ -82,10 +73,9 @@ function saveListVisible() {
 }
 
 // выбор области и действие с этим
-function areaPick(selectedActionButton) {
+function actionButtonPick(selectedActionButton) {
     let lastActionName;
 
-    //убираем везде возможный выбор
     for (let button of document.getElementById('buttons').children) {
         if (button.id.split('-')[0]) {
             if (button.className !== '') {
@@ -97,8 +87,27 @@ function areaPick(selectedActionButton) {
     selectedIconSRC = '';
     lastSelectedIcon = undefined;
 
+    areaPickReset();
+    brickPickReset();
+    actionButtonsReset();
 
     let actionName = selectedActionButton.id.split('-')[1];
+
+    if (actionName === 'copyPaste' || actionName === 'delete') {
+        if (actionName === lastActionName) {
+
+            areaPickReset();
+            brickPickReset();
+            actionButtonsReset();
+        } else {
+            selectedActionButton.className = 'selected';
+            for (let brick of document.getElementById('iconBricks').children) {
+                brick.className = 'noSelected';
+            }
+            selectedActionName = actionName;
+        }
+    }
+    // lastActionName = actionName; //TODO проверить работу
     switch (actionName) {
         case 'clockwise':
 
@@ -113,29 +122,39 @@ function areaPick(selectedActionButton) {
 
             return;
     }
-    if (actionName === 'copyPaste' || actionName === 'delete') {
-        if (actionName === lastActionName) {
-            areaPickingReset();
-        } else {
-            selectedActionButton.className = 'selected';
-            for (let brick of document.getElementById('iconBricks').children) {
-                brick.className = 'noSelected';
-            }
-            selectedActionName = actionName;
-        }
-    }
 }
 
-function areaPickingReset() {
+function areaPickReset() {
     firstElementPosition = [];
     firstElement = undefined;
     lastElementPosition = [];
+    hoveredElements = [];
+
     for (let icon of document.getElementById('container').children) {
-        if (icon.className === 'selected') {
-            icon.className = '';
-        }
+        icon.className = '';
     }
     let temp = selectedActionName;
     selectedActionName = undefined;
+
     return temp;
+}
+
+function brickPickReset() {
+    selectedIconSRC = '';
+    lastSelectedIcon = undefined;
+    for (let brick of document.getElementById('iconBricks').children) {
+        brick.className = 'noSelected';
+    }
+}
+
+function actionButtonsReset() {
+    for (let button of document.getElementById('buttons').children) {
+        if (button.id.split('-')[0]) {
+            if (button.className !== '') {
+                lastActionName = button.id.split('-')[1];
+            }
+            button.className = '';
+        }
+    }
+    copyActionElements = []
 }

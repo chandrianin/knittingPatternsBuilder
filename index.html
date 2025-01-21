@@ -27,20 +27,19 @@
             <input type="number" onchange="inputChange()" id="columnInput" min="2" max="200" value="4"
                    placeholder="Столбцов">
         </div>
-        <input onclick="areaPick(this)" type="button" value="Поворот на 90°" id="action-clockwise">
-        <input onclick="areaPick(this)" type="button" value="Поворот на -90°" id="action-counterclockwise">
-        <input onclick="areaPick(this)" type="button" value="Копировать область" id="action-copyPaste">
-        <input onclick="areaPick(this)" type="button" value="Очистить область" id="action-delete">
-        <input onclick="areaPick(this)" type="button" value="Сохранить" id="action-save">
-        <input onclick="areaPick(this)" type="button" value="Распечатать" id="action-print">
+        <input onclick="actionButtonPick(this)" type="button" value="Поворот на 90°" id="action-clockwise">
+        <input onclick="actionButtonPick(this)" type="button" value="Поворот на -90°" id="action-counterclockwise">
+        <input onclick="actionButtonPick(this)" type="button" value="Копировать область" id="action-copyPaste">
+        <input onclick="actionButtonPick(this)" type="button" value="Очистить область" id="action-delete">
+        <input onclick="actionButtonPick(this)" type="button" value="Сохранить" id="action-save">
+        <input onclick="actionButtonPick(this)" type="button" value="Распечатать" id="action-print">
     </div>
 </div>
 <div id="saveBar" class="open">
-    <!--TODO спрашивать по поводу перезаписи сохранения-->
+    <!--TODO спрашивать переименовать текущее или создать новое сохранение-->
 </div>
 <div id="container">
     <!--TODO добавить цифры - номера строк и столбцов-->
-    <!--TODO добавить подсвечивание выбираемой области-->
 </div>
 </body>
 </html>

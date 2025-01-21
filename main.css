@@ -200,6 +200,7 @@ body {
 
     margin-top: 10px;
 }
+
 #buttons input[type=button].selected {
     background-color: #bd4e4e !important;
     color: var(--onPrimary) !important;
@@ -233,7 +234,6 @@ body {
 #container img {
     transition: all ease-out 0.15s;
     width: 51px;
-    /*height: 49px;*/
     border: #3B0909 1px solid
 }
 
@@ -242,5 +242,9 @@ body {
 }
 
 #container img:hover {
-    background-color: #ce6d6d;
+    background-color: #ce6d6d !important;
+}
+
+#container img.hovered {
+    background-color: #ffa8a8;
 }

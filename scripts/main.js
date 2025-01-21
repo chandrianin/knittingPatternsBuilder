@@ -3,6 +3,11 @@ let lastBrickNumber = 9;
 let elements = [];
 let currentKey;
 
+/**
+ * TODO добавить ctrl + z, ctrl + shift + z через массив из разных состояний elements
+ */
+
+
 window.onload = function () {
     let iconsContainer = document.getElementById("iconBricks");
     for (let i = firstBrickNumber; i <= lastBrickNumber; i++) {
@@ -55,40 +60,114 @@ function containerCreate(newRows, newColumns) {
             temp += '<img src="' + element + '" ' +
                 'alt="' + element + '" ' +
                 'onclick="elementPick(this)" ' +
+                'onmouseenter="elementHover(this)" ' +
                 'data-row="' + i + '" ' +
-                'data-column="' + j + '">';
+                'data-column="' + j + '" ' +
+                'class="' + '' + '" ' +
+                'id="' + i + '-' + j + '">';
         }
     }
 
     container.innerHTML = temp;
     saveData();
+    elementHover(document.getElementById(hoveredElements[hoveredElements.length - 1]));
 }
+
+let minRow;
+let maxRow;
+let minCol;
+let maxCol;
+
+let hoveredElements = [];
+
+// наведение на элемент
+function elementHover(element) {
+    if (firstElementPosition.length === 2 && lastElementPosition.length === 0) {
+        let id = element.id.split('-');
+        let row = parseInt(id[0]);
+        let column = parseInt(id[1]);
+        minRow = Math.min(firstElementPosition[0], row);
+        maxRow = Math.max(firstElementPosition[0], row);
+        minCol = Math.min(firstElementPosition[1], column);
+        maxCol = Math.max(firstElementPosition[1], column);
+
+        for (let id of hoveredElements) {
+            document.getElementById(id).className = '';
+        }
+        hoveredElements = [];
+        for (let i = minRow; i <= maxRow; i++) {
+            for (let j = minCol; j <= maxCol; j++) {
+                document.getElementById(i + '-' + j).className = 'hovered';
+                hoveredElements.push(i + '-' + j);
+            }
+        }
+        document.getElementById(firstElementPosition[0] + '-' + firstElementPosition[1]).className = 'primarySelected';
+    } else if (firstElementPosition.length === 2 && lastElementPosition.length === 2 && selectedActionName === 'copyPaste') {
+        for (let hoveredElem of hoveredElements) {
+            document.getElementById(hoveredElem).className = 'hovered';
+        }
+        // for (let i = minRow; i <= maxRow; i++) {
+        //     for (let j = minCol; j <= maxCol; j++) {
+        //         document.getElementById(i + '-' + j).className = 'hovered';
+        //     }
+        // }
+    } else if (firstElementPosition.length === 0 && lastElementPosition.length === 0 || selectedActionName === 'delete') {
+        for (let hoveredElem of hoveredElements) {
+            document.getElementById(hoveredElem).className = '';
+        }
+        hoveredElements = [];
+    }
+}
+
+let copyActionElements = [];
 
 // выбор ячейки в #container
 function elementPick(element) {
-    let data = element.dataset;
-    let row = data.row;
-    let column = data.column;
+    let id = element.id.split('-');
+    let row = parseInt(id[0]);
+    let column = parseInt(id[1]);
+
+    if (copyActionElements.length > 0 && selectedActionName === 'copyPaste') {
+        for (let i = row; i < row + copyActionElements.length; i++) {
+            for (let j = column; j < column + copyActionElements[i - row].length; j++) {
+                elements[i][j] = copyActionElements[i - row][j - column];
+            }
+        }
+        containerCreate(parseInt(document.getElementById("rowInput").value),
+            parseInt(document.getElementById("columnInput").value));
+        saveData();
+        return;
+    }
 
     if (selectedActionName === undefined) {
         element.src = selectedIconSRC;
+        element.alt = selectedIconSRC;
         elements[row][column] = selectedIconSRC;
         saveData();
     } else {
         // в случае выбора области
         if (firstElementPosition.length === 2) {
-            lastElementPosition[0] = row;
-            lastElementPosition[1] = column;
-
+            // let temp = [];
             switch (selectedActionName) {
                 case 'copyPaste':
-
+                    for (let i = 0; i < elements.length; i++) {
+                        for (let j = 0; j < elements[i].length; j++) {
+                            if (i >= minRow && i <= maxRow &&
+                                j >= minCol && j <= maxCol) {
+                                let tempRow = i - minRow;
+                                let tempCol = j - minCol;
+                                if (copyActionElements[tempRow] === undefined) {
+                                    copyActionElements[tempRow] = [];
+                                }
+                                copyActionElements[tempRow][tempCol] = elements[i][j];
+                                //TODO добавлять недостающие строки/столбцы
+                            }
+                        }
+                    }
+                    lastElementPosition[0] = row;
+                    lastElementPosition[1] = column;
                     break;
                 case 'delete':
-                    let minRow = Math.min(firstElementPosition[0], lastElementPosition[0]);
-                    let maxRow = Math.max(firstElementPosition[0], lastElementPosition[0]);
-                    let minCol = Math.min(firstElementPosition[1], lastElementPosition[1]);
-                    let maxCol = Math.max(firstElementPosition[1], lastElementPosition[1]);
                     for (let i = 0; i < elements.length; i++) {
                         for (let j = 0; j < elements[i].length; j++) {
                             if (i >= minRow && i <= maxRow &&
@@ -97,15 +176,25 @@ function elementPick(element) {
                             }
                         }
                     }
-                    containerCreate(parseInt(document.getElementById("rowInput").value),
-                        parseInt(document.getElementById("columnInput").value))
+                    lastElementPosition.length = 0;
+                    firstElementPosition.length = 0;
                     break;
             }
-            selectedActionName = areaPickingReset();
+            if (selectedActionName === "delete") {
+                // selectedActionName = areaPickReset();
+                selectedActionName = undefined;
+                actionButtonsReset();
+                // actionButtonsReset();
+            }
+
+
+            containerCreate(parseInt(document.getElementById("rowInput").value),
+                parseInt(document.getElementById("columnInput").value));
             saveData();
-        } else if (firstElementPosition.length === 0 && lastElementPosition.length === 0) {
+        } else if (firstElementPosition.length === 0) {
             firstElementPosition[0] = row;
             firstElementPosition[1] = column;
+
             element.className = 'primarySelected';
             firstElement = element;
         }
